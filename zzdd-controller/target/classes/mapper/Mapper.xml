@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzd.dao.MeetDao">
+    <select id="list" resultType="map">
+        select m.id,m.code,m.name,m.start_time,m.end_time,m.create_time,t.name as type from meet m left join type t on m.type = t.id group by m.id order by m.start_time desc
+    </select>
+    <select id="selectType" resultType="map">
+        select * from  type
+    </select>
+    <insert id="add">
+        insert into meet values (null,#{code},#{name},#{start_time},#{end_time},#{create_time},#{type})
+    </insert>
+    <select id="selectOne" resultType="map">
+        select * from meet where id=#{id}
+    </select>
+    <delete id="delete">
+        delete from meet where id = #{id}
+    </delete>
+    <update id="update">
+        update meet set code=#{code},code=#{code},name=#{name},start_time=#{start_time},end_time=#{end_time},create_time=#{create_time},type=#{type} where id=#{id}
+    </update>
+</mapper>
